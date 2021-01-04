@@ -33,6 +33,15 @@ with(df, {
   print(paste0(z[1], " number is ", m))
 })
 
+## %% Set the names of an object without making a temporary variable
+setNames( 1:3, c("foo", "bar", "baz") )
+# this is just a short form of
+tmp <- 1:3
+names(tmp) <-  c("foo", "bar", "baz")
+tmp
+
+
+
 
 
 
