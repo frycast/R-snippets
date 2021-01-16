@@ -40,6 +40,18 @@ tmp <- 1:3
 names(tmp) <-  c("foo", "bar", "baz")
 tmp
 
+## %% Functions can cause side effects with <<-
+g <- 0
+myfunc <- function() {
+  g <- g + 1
+}
+myfunc2 <- function() {
+  g <<- g + 1
+}
+myfunc()
+g
+myfunc2()
+g
 
 
 
