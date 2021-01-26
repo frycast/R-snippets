@@ -61,7 +61,12 @@ print({
 })
 
 
-
-
-
-
+## %% rbindlist is just like do.call("rbind", l)
+# use it to bind a list of matrices into a single one
+DT1 = data.table(A=1:3,B=letters[1:3])
+DT2 = data.table(A=4:5,B=letters[4:5])
+l = list(DT1,DT2)
+rbindlist(l)
+m1 <- matrix(1:9, nrow = 3)
+m2 <- matrix(1:9, nrow = 3)
+do.call(rbind, list(m1,m2))
