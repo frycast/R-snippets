@@ -54,3 +54,41 @@ save_results <- function(results) {
   }
   error("Unable to continue saving results")
 }
+
+## %% repeat expr with arguments until there is no error
+library(futile.logger)
+library(utils)
+retry <- function(expr, isError=function(x) "try-error" %in% class(x), 
+                  maxErrors=5, sleep=0) {
+  attempts = 0
+  retval = try(eval(expr))
+  while (isError(retval)) {
+    attempts = attempts + 1
+    if (attempts >= maxErrors) {
+      msg = sprintf("retry: too many retries [[%s]]\n", 
+                    capture.output(str(retval)))
+      flog.fatal(msg)
+      stop(msg)
+    } else {
+      msg = sprintf("retry: error in attempt %i/%i [[%s]]\n", 
+                    attempts, maxErrors, 
+                    capture.output(str(retval)))
+      flog.error(msg)
+      warning(msg)
+    }
+    if (sleep > 0) Sys.sleep(sleep)
+    retval = try(eval(expr))
+  }
+  return(retval)
+}
+
+f <- function(){
+  n <- runif(1)
+  if (n < 0.8) {
+    stop("ya")
+  }
+  n
+}
+a <- retry({f()})
+
+

@@ -70,3 +70,9 @@ rbindlist(l)
 m1 <- matrix(1:9, nrow = 3)
 m2 <- matrix(1:9, nrow = 3)
 do.call(rbind, list(m1,m2))
+
+
+## %% Get the name of the current worker when parallel processing
+foreach(i = 1:12, .combine=c) %dopar% {
+  Sys.info()[['nodename']]
+}
