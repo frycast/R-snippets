@@ -92,3 +92,7 @@ f <- function(){
 a <- retry({f()})
 
 
+## %% Peek at a list object with regular structure
+peek <- function(obj) {
+  str(obj, max.level=1, vec.len=2, list.len=2)
+}

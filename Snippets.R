@@ -60,7 +60,6 @@ print({
     a
 })
 
-
 ## %% rbindlist is just like do.call("rbind", l)
 # use it to bind a list of matrices into a single one
 DT1 = data.table(A=1:3,B=letters[1:3])
