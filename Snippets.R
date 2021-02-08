@@ -73,6 +73,7 @@ do.call(rbind, list(m1,m2))
 
 
 ## %% Get the name of the current worker when parallel processing
+# combining the node name with the processid of the worker
 foreach(i = 1:12, .combine=c) %dopar% {
-  Sys.info()[['nodename']]
+  paste(Sys.info()[['nodename']], Sys.getpid(), sep='-')
 }
